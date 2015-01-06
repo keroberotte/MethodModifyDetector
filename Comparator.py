@@ -1,4 +1,5 @@
 #coding: utf-8
+import CONSTS
 from Parser import Parser
 
 class Comparator:
@@ -28,7 +29,7 @@ class Comparator:
 			print "\t" + method['name']
 
 		print "print develop methods name below"
-		for method in self.methods1:
+		for method in self.methods2:
 			print "\t" + method['name']
 	
 	def dump_method_content(self):
@@ -37,7 +38,7 @@ class Comparator:
 			print "\t" + method['content']
 
 		print "print develop methods content below"
-		for method in self.methods1:
+		for method in self.methods2:
 			print "\t" + method['content']
 	
 	def pick_same_method_name(self):
@@ -48,7 +49,22 @@ class Comparator:
 				self.same_method.append(orig_method['name'])
 		return self.same_method
 	
+	def get_modified_method(self):
+		self.pick_same_method_name()
+		modified = []
+		for method_name in self.same_method:
+			o = [item for item in self.methods1 if item['name'] == method_name][0]
+			d = [item for item in self.methods2 if item['name'] == method_name][0]
+			if o['content'] != d['content']:
+				modified.append(o['name'])
+		return modified
+	
 if __name__ == '__main__':
-	c = Comparator(DIR1, DIR1)
+	c = Comparator(
+		CONSTS.TESTFILE1,
+		CONSTS.TESTFILE2
+	)
 	c.compare()
 	c.dump_method_name()
+	#c.dump_method_content()
+	#c.pick_same_method_name()
