@@ -1,4 +1,5 @@
 # coding: utf-8
+import CONSTS
 import fnmatch
 import re
 import logging
@@ -130,7 +131,7 @@ class Parser:
 				if self.is_split_char_for_method_name(self.secure_read(1)):
 					self.secure_seek(-1, 1)
 					# 1個目の区切り文字を飛ばす
-					self_reverse_seek_to_cond(is_split_char_for_method_name)
+					self.reverse_seek_to_cond(self.is_split_char_for_method_name)
 				# メソッド名の先頭に移動
 				self.reverse_seek_to_cond(self.is_split_char_for_method_name)
 
@@ -162,7 +163,7 @@ class Parser:
 		return methods_content
 
 if __name__ == '__main__':
-	p = Parser(DIR1)
+	p = Parser(TESTFILE1)
 	
 	#for key, val in p.find_methods().iteritems():
 	for item in p.find_methods():
