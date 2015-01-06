@@ -163,7 +163,7 @@ class Parser:
 		return methods_content
 
 if __name__ == '__main__':
-	p = Parser(TESTFILE1)
+	p = Parser(CONSTS.TESTFILE1)
 	
 	#for key, val in p.find_methods().iteritems():
 	for item in p.find_methods():
